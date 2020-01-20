@@ -818,7 +818,7 @@ class ThreeGeo {
         dataEle.forEach((data, idx) => {
             ids[data[0].join('/')] = idx;
         });
-        console.log('ids:', ids);
+        // console.log('ids:', ids);
         return ids;
     }
     static getNeighborsInfo(dataEle, dataEleIds, zoompos) {
@@ -855,7 +855,7 @@ class ThreeGeo {
     }
 
     getRgbDem(resolve, dataEle, apiSatellite, onSatelliteMat) {
-        console.log('apiSatellite:', apiSatellite);
+        // console.log('apiSatellite:', apiSatellite);
 
         // dataEle should be sorted so that ThreeGeo.resolveSeams() is applied
         // in the proper order, or the results will have broken stripes
@@ -876,7 +876,7 @@ class ThreeGeo {
             // console.log('dealing with the seams of:', zoompos);
             let cSegments = ThreeGeo.resolveSeams(
                 arr, ThreeGeo.getNeighborsInfo(dataEle, dataEleIds, zoompos));
-            console.log('cSegments:', cSegments);
+            // console.log('cSegments:', cSegments);
             // w and h don't matter since position.array is being overwritten
 
             let geom = new THREE.PlaneBufferGeometry(
@@ -930,7 +930,7 @@ class ThreeGeo {
     getRgbTiles(resolve, zpCovered, bbox, radius, apiRgb, apiSatellite,
         onRgbDem, onSatelliteMat) {
         let zpEle = ThreeGeo.getZoomposEle(zpCovered); // e.g. satellite's zoom: 14
-        console.log('zpEle:', zpEle); // e.g. dem's zoom: 12 (=14-2)
+        // console.log('zpEle:', zpEle); // e.g. dem's zoom: 12 (=14-2)
 
         let dataEleCovered = [];
         let count = 0; // TODO use Promise() instead ??
@@ -940,7 +940,7 @@ class ThreeGeo {
                 if (pixels) {
                     dataEleCovered = dataEleCovered.concat(this.processRgbTile(
                         pixels, zoompos, zpCovered, bbox, radius));
-                    console.log(`now ${dataEleCovered.length} satellite tiles in dataEleCovered`);
+                    // console.log(`now ${dataEleCovered.length} satellite tiles in dataEleCovered`);
                 } else {
                     console.log(`fetchTile() failed for rgb dem of zp: ${zoompos} (count: ${count}/${zpEle.length})`);
                 }
@@ -1031,12 +1031,12 @@ class ThreeGeo {
     // zoom: 11, // 1 tile           - 0s
     getTerrain(resolve, origin, radius, zoom, callbacks={}) {
         let bbox = ThreeGeo.getBbox(origin, radius);
-        console.log('bbox:', bbox);
+        // console.log('bbox:', bbox);
 
         let zpCovered = ThreeGeo.getZoomposCovered(bbox.feature, zoom);
-        console.log('zpCovered:', zpCovered);
+        // console.log('zpCovered:', zpCovered);
         if (0) { //!!!!!!!! for debug
-            console.log('zpCovered mods enabled for debug!!!!');
+            // console.log('zpCovered mods enabled for debug!!!!');
             // zpCovered.length = 1;
             // zpCovered.length = 2;
             zpCovered.length = 4;
